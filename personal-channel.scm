@@ -1,8 +1,11 @@
 (define-module (personal-channel)
   #:use-module (guix packages)
+  #:use-module (guix packages compression)
   #:use-module (guix download)
+  #:use-module (guix build utils)
   #:use-module (guix git-download)
   #:use-module (guix build-system font)
+  #:use-module (nonguix build-system binary)
   #:use-module ((guix licenses) #:prefix license:))
 
 (define-public font-nerd-fonts
@@ -37,3 +40,33 @@
   from popular ‘iconic fonts’ such as Font Awesome, Devicons, Octicons,
   and others.")
     (license license:expat)))
+
+
+(define-global rust-zellij-bin 
+ (package
+  (name "rust-zellij-bin")
+  (version "0.38.2")
+  (source 
+    (origin
+     (method url-fetch)
+     (uri (string-append
+            "https://github.com/zellij-org/zellij/releases/download/v" 
+            version 
+            "/zellij-x86_64-unknown-linux-musl.tar.gz"))
+     (sha256
+      (base32 "05ngkxvadxgh3wdsmj19dgq2ayh1nv5iyn3jib97a8kslzbigkvm"))))
+  (build-system binary-build-system)
+  (supported-systems '("x86_64-linux" "i686-linux"))
+  (arguments '(
+     #:install-plan '(("zellij" "bin/"))
+
+     #:phases (modify-phases %standard-phases
+		   (replace 'unpack
+			  (lambda* (#:key source #:allow-other-keys)
+			  	(invoke "tar" "xvf" source)
+			  	#t)))))
+  (home-page "https://zellij.dev")
+  (synopsis "A terminal workspace with batteries included")
+  (description
+   "This package provides a terminal workspace with batteries included")
+  (license license:expat)))
