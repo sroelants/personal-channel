@@ -41,7 +41,7 @@
   and others.")
     (license license:expat)))
 
-(define-global rust-zellij-bin 
+(define-public rust-zellij-bin 
  (package
   (name "rust-zellij-bin")
   (version "0.38.2")
