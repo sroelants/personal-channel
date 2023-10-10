@@ -1,12 +1,12 @@
 (define-module (personal-channel)
+  #:use-module (gnu packages compression)
   #:use-module (guix packages)
-  #:use-module (guix packages compression)
   #:use-module (guix download)
   #:use-module (guix build utils)
   #:use-module (guix git-download)
   #:use-module (guix build-system font)
-  #:use-module (nonguix build-system binary)
-  #:use-module ((guix licenses) #:prefix license:))
+  #:use-module ((guix licenses) #:prefix license:)
+  #:use-module (nonguix build-system binary))
 
 (define-public font-nerd-fonts
   (package
@@ -40,7 +40,6 @@
   from popular ‘iconic fonts’ such as Font Awesome, Devicons, Octicons,
   and others.")
     (license license:expat)))
-
 
 (define-global rust-zellij-bin 
  (package
