@@ -1,4 +1,4 @@
-(define-module (personal-channel services kmonad)
+(define-module (services kmonad)
   #:use-module (gnu services)
   #:use-module (gnu services shepherd)
   #:use-module (gnu packages haskell-apps)
