@@ -1,4 +1,4 @@
-(define-module (personal-channel)
+(define-module (personal-channel packages personal)
   #:use-module (gnu packages compression)
   #:use-module (guix packages)
   #:use-module (guix download)
